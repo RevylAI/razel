@@ -1,0 +1,23 @@
+# REV-4769 staging end-to-end Mac proof fixture (revyl harness). Throwaway; removed after the runs.
+project:
+  id: "cfb011cd-db22-4979-9433-82f509889a8f"
+session:
+  default_profile: mac-start
+  profiles:
+    mac-start:
+      script: scripts/mac-start.sh
+    mac-extra:
+      script: scripts/mac-extra.sh
+pr_review:
+  enabled: true
+  proof_of_changes:
+    enabled: true
+    harness:
+      kind: revyl
+    always_verify:
+      - "Run the session profile mac-extra on the Mac once, then use revyl computer exec to print ~/rev4769-extra.txt and confirm it contains REV4769_EXTRA_OK."
+      - "Use revyl computer exec to print ~/rev4769-start.txt and confirm it contains REV4769_START_OK, which the starting profile wrote."
+      - "Take one screenshot of the Mac's screen with revyl computer screenshot."
+    macos:
+      app_id: "8e231378-8f97-4dc1-99d0-535db1ec041a"
+      session_profile: mac-start
