@@ -1,0 +1,22 @@
+# Staging Mac proof fixture (revyl harness, no web target). Throwaway; removed after the runs.
+project:
+  id: "1a563942-dc3c-47c2-bcbf-c3481c1280de"
+session:
+  default_profile: mac-start
+  profiles:
+    mac-start:
+      script: scripts/mac-start.sh
+    mac-extra:
+      script: scripts/mac-extra.sh
+pr_review:
+  enabled: true
+  proof_of_changes:
+    enabled: true
+    harness:
+      kind: revyl
+    always_verify:
+      - "Run the session profile mac-extra on the Mac once, then use revyl computer exec to print ~/rev4769-extra.txt and confirm it contains REV4769_EXTRA_OK."
+      - "Use revyl computer exec to print ~/rev4769-start.txt and confirm it contains REV4769_START_OK, which the starting profile wrote."
+    macos:
+      app_id: "441c8d1e-132e-4690-978e-3eb7acf0a1fb"
+      session_profile: mac-start
